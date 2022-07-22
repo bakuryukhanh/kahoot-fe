@@ -15,12 +15,13 @@ import { io } from "socket.io-client"
 import { useDispatch } from "react-redux"
 import { createSocket } from "./actions/socket"
 
+const apiUrl = process.env.API || "http://localhost:3000"
 function App() {
   const user = JSON.parse(localStorage.getItem("profile"))
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const socket = io("http://localhost:3001")
+    const socket = io(apiUrl)
     dispatch(createSocket(socket))
 
     return () => socket.disconnect()
